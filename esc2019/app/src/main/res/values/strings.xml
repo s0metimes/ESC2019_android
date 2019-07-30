@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">2019 ESC 게시판앱</string>
+    <!-- toolbar menus -->
+    <string name="menu_write">작성</string>
+    <string name="menu_edit">수정</string>
+    <string name="menu_delete">삭제</string>
+</resources>

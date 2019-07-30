@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- font size -->
+    <dimen name="fontVeryLarge">32sp</dimen>
+    <dimen name="fontLarge">24sp</dimen>
+    <dimen name="fontMediumLarge">16sp</dimen>
+    <dimen name="fontMedium">12sp</dimen>
+    <dimen name="fontSmall">10sp</dimen>
+
+    <!-- layout size -->
+</resources>
