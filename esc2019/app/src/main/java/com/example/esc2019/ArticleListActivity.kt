@@ -1,6 +1,7 @@
 package com.example.esc2019
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -11,21 +12,14 @@ import android.view.MenuItem
 
 class ArticleListActivity : AppCompatActivity() {
 
+    private val articleAdapter = ArticleAdapter(this, Articles.list)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_article_list)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val articleAdapter = ArticleAdapter(this, Articles.list)
         val rcvArticles = findViewById<RecyclerView>(R.id.rcv_articles)
         val lm = LinearLayoutManager(this)
-
-
-        with(Articles.list){
-            add(Article(1, "제목입니다1", "내용입니다1", "이름1", "2019-07-29 14:37"))
-            add(Article(2, "제목입니다2", "내용입니다2", "이름2", "2019-07-29 14:37"))
-            add(Article(3, "제목입니다3", "내용입니다3", "이름3", "2019-07-29 14:37"))
-        }
 
 
         rcvArticles.apply {
@@ -37,6 +31,7 @@ class ArticleListActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.title = "커뮤니티"
 
+        NetworkAsyncTask().execute()
 
     }
 
@@ -56,5 +51,15 @@ class ArticleListActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    inner class NetworkAsyncTask: AsyncTask<Void, Void, ArrayList<Article>>() {
+        override fun doInBackground(vararg p0: Void?): ArrayList<Article> = ArticleModel.getArticles()
+
+        override fun onPostExecute(result: ArrayList<Article>) {
+            super.onPostExecute(result)
+
+            articleAdapter.updateData(result)
+        }
     }
 }

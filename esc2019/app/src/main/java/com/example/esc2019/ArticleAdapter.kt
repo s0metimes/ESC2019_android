@@ -43,4 +43,10 @@ class ArticleAdapter(val context: Context, private val articles: ArrayList<Artic
             tvName?.text = article.name
         }
     }
+
+    fun updateData(articles: ArrayList<Article>) {
+        this.articles.clear()
+        this.articles.addAll(articles)
+        notifyDataSetChanged()
+    }
 }
